@@ -48,6 +48,8 @@ type DailyStats = {
 type StudyStore = {
   version: 1;
   progress: Record<string, ReviewRecord>;
+  excluded: Record<string, number>;
+  newOrder: string[];
   daily: DailyStats;
   streak: number;
   lastStudyDate: string;
@@ -56,19 +58,22 @@ type StudyStore = {
 
 type Settings = {
   dailyNew: number;
-  smartMix: boolean;
 };
 
 const deck = rawDeck as Card[];
+const cardById = new Map(deck.map((card) => [card.id, card]));
 const PROGRESS_KEY = "dutch2000.progress.v1";
 const SETTINGS_KEY = "dutch2000.settings.v1";
 const DAY = 86_400_000;
 const MINUTE = 60_000;
 const EMPTY_PROGRESS: Record<string, ReviewRecord> = {};
+const EMPTY_EXCLUDED: Record<string, number> = {};
 
 const defaultStore = (): StudyStore => ({
   version: 1,
   progress: {},
+  excluded: {},
+  newOrder: [],
   daily: {
     date: localDateKey(),
     reviewed: 0,
@@ -82,7 +87,6 @@ const defaultStore = (): StudyStore => ({
 
 const defaultSettings: Settings = {
   dailyNew: 40,
-  smartMix: true,
 };
 
 function localDateKey(date = new Date()) {
@@ -105,38 +109,61 @@ function freshDaily(daily: DailyStats): DailyStats {
     : { date: today, reviewed: 0, correct: 0, newSeen: 0 };
 }
 
-function interleavedOrder() {
-  const result: number[] = [];
-  const bands = 10;
-  const bandSize = Math.ceil(deck.length / bands);
-  for (let offset = 0; offset < bandSize; offset += 1) {
-    for (let band = 0; band < bands; band += 1) {
-      const index = band * bandSize + offset;
-      if (index < deck.length) result.push(index);
-    }
+function shuffledDeckIds() {
+  const ids = deck.map((card) => card.id);
+  for (let index = ids.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [ids[index], ids[swapIndex]] = [ids[swapIndex], ids[index]];
   }
-  return result;
+  return ids;
 }
 
-const smartOrder = interleavedOrder();
-const frequencyOrder = deck.map((_, index) => index);
+function normalizeOrder(value: unknown) {
+  const validIds = new Set(deck.map((card) => card.id));
+  const seen = new Set<string>();
+  const saved = Array.isArray(value)
+    ? value.filter((id): id is string => {
+        if (typeof id !== "string" || !validIds.has(id) || seen.has(id)) {
+          return false;
+        }
+        seen.add(id);
+        return true;
+      })
+    : [];
+  const missing = shuffledDeckIds().filter((id) => !seen.has(id));
+  return [...saved, ...missing];
+}
+
+function normalizeStore(value: Partial<StudyStore> | null): StudyStore {
+  const fallback = defaultStore();
+  if (
+    !value ||
+    value.version !== 1 ||
+    typeof value.progress !== "object" ||
+    value.progress === null
+  ) {
+    return { ...fallback, newOrder: shuffledDeckIds() };
+  }
+  return {
+    ...fallback,
+    ...value,
+    daily: freshDaily(value.daily ?? fallback.daily),
+    progress: value.progress,
+    excluded:
+      typeof value.excluded === "object" && value.excluded !== null
+        ? value.excluded
+        : {},
+    newOrder: normalizeOrder(value.newOrder),
+  };
+}
 
 function safeLoadStore(): StudyStore {
   try {
     const raw = localStorage.getItem(PROGRESS_KEY);
-    if (!raw) return defaultStore();
-    const parsed = JSON.parse(raw) as Partial<StudyStore>;
-    if (parsed.version !== 1 || typeof parsed.progress !== "object") {
-      return defaultStore();
-    }
-    return {
-      ...defaultStore(),
-      ...parsed,
-      daily: freshDaily(parsed.daily ?? defaultStore().daily),
-      progress: parsed.progress ?? {},
-    };
+    if (!raw) return normalizeStore(null);
+    return normalizeStore(JSON.parse(raw) as Partial<StudyStore>);
   } catch {
-    return defaultStore();
+    return normalizeStore(null);
   }
 }
 
@@ -203,9 +230,11 @@ export default function Home() {
   const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
   const [panel, setPanel] = useState<"progress" | "settings" | null>(null);
   const [notice, setNotice] = useState("");
+  const [undoRemovedId, setUndoRemovedId] = useState<string | null>(null);
   const [clock, setClock] = useState(Date.now());
   const revealButton = useRef<HTMLButtonElement>(null);
   const importInput = useRef<HTMLInputElement>(null);
+  const noticeTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -216,6 +245,7 @@ export default function Home() {
     return () => {
       window.cancelAnimationFrame(frame);
       window.clearInterval(timer);
+      if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
     };
   }, []);
 
@@ -230,33 +260,51 @@ export default function Home() {
 
   const daily = store ? freshDaily(store.daily) : defaultStore().daily;
   const progress = store?.progress ?? EMPTY_PROGRESS;
+  const excluded = store?.excluded ?? EMPTY_EXCLUDED;
+  const activeDeckLength = deck.length - Object.keys(excluded).length;
   const dueCards = useMemo(
     () =>
       deck
-        .filter((card) => progress[card.id]?.due <= clock)
+        .filter(
+          (card) => !excluded[card.id] && progress[card.id]?.due <= clock,
+        )
         .sort((a, b) => progress[a.id].due - progress[b.id].due),
-    [clock, progress],
+    [clock, excluded, progress],
   );
   const newBudget = Math.max(0, settings.dailyNew - daily.newSeen);
-  const order = settings.smartMix ? smartOrder : frequencyOrder;
+  const unseenCount = deck.filter(
+    (card) => !excluded[card.id] && !progress[card.id],
+  ).length;
+  const sessionNewRemaining = Math.min(newBudget, unseenCount);
   const nextNewCard =
-    newBudget > 0
-      ? order.map((index) => deck[index]).find((card) => !progress[card.id])
+    sessionNewRemaining > 0
+      ? store?.newOrder
+          .map((id) => cardById.get(id))
+          .find(
+            (card): card is Card =>
+              Boolean(card && !excluded[card.id] && !progress[card.id]),
+          )
       : undefined;
   const currentCard = dueCards[0] ?? nextNewCard;
   const currentRecord = currentCard ? progress[currentCard.id] : undefined;
   const isNew = Boolean(currentCard && !currentRecord);
   const revealed = Boolean(currentCard && revealedCardId === currentCard.id);
 
-  const learned = Object.keys(progress).length;
-  const secured = Object.values(progress).filter(
-    (record) => record.interval >= 21,
-  ).length;
+  const activeRecords = Object.entries(progress).filter(
+    ([cardId]) => !excluded[cardId],
+  );
+  const learned = activeRecords.length;
+  const secured = activeRecords.filter(([, record]) => record.interval >= 21)
+    .length;
   const learning = learned - secured;
+  const excludedCards = Object.entries(excluded)
+    .sort(([, removedAtA], [, removedAtB]) => removedAtB - removedAtA)
+    .map(([cardId]) => cardById.get(cardId))
+    .filter((card): card is Card => Boolean(card));
   const accuracy = daily.reviewed
     ? Math.round((daily.correct / daily.reviewed) * 100)
     : 0;
-  const sessionRemaining = dueCards.length + newBudget;
+  const sessionRemaining = dueCards.length + sessionNewRemaining;
   const sessionTotal = daily.reviewed + sessionRemaining;
   const sessionProgress = sessionTotal
     ? Math.min(100, (daily.reviewed / sessionTotal) * 100)
@@ -265,6 +313,19 @@ export default function Home() {
   useEffect(() => {
     window.requestAnimationFrame(() => revealButton.current?.focus());
   }, [currentCard?.id]);
+
+  function showNotice(
+    message: string,
+    options: { duration?: number; undoId?: string | null } = {},
+  ) {
+    if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
+    setNotice(message);
+    setUndoRemovedId(options.undoId ?? null);
+    noticeTimer.current = window.setTimeout(() => {
+      setNotice("");
+      setUndoRemovedId(null);
+    }, options.duration ?? 2400);
+  }
 
   useEffect(() => {
     function handleKey(event: KeyboardEvent) {
@@ -316,14 +377,46 @@ export default function Home() {
       totalReviews: store.totalReviews + 1,
     });
     setRevealedCardId(null);
-    setNotice(
+    showNotice(
       rating === "easy" && !previous
         ? "Known — this card will return in 45 days."
         : "",
     );
-    if (rating === "easy" && !previous) {
-      window.setTimeout(() => setNotice(""), 2200);
-    }
+  }
+
+  function removeCard(card: Card) {
+    if (!store) return;
+    setStore({
+      ...store,
+      excluded: {
+        ...store.excluded,
+        [card.id]: Date.now(),
+      },
+    });
+    setRevealedCardId(null);
+    showNotice(`${card.dutch} removed from practice.`, {
+      duration: 5000,
+      undoId: card.id,
+    });
+  }
+
+  function restoreCard(cardId: string) {
+    if (!store) return;
+    const restoredCard = cardById.get(cardId);
+    const nextExcluded = { ...store.excluded };
+    delete nextExcluded[cardId];
+    setStore({ ...store, excluded: nextExcluded });
+    showNotice(
+      restoredCard
+        ? `${restoredCard.dutch} restored to practice.`
+        : "Word restored to practice.",
+    );
+  }
+
+  function reshuffleUnseen() {
+    if (!store) return;
+    setStore({ ...store, newOrder: shuffledDeckIds() });
+    showNotice("Unseen words reshuffled.");
   }
 
   function exportProgress() {
@@ -341,7 +434,7 @@ export default function Home() {
     link.download = `woordvooruit-backup-${localDateKey()}.json`;
     link.click();
     URL.revokeObjectURL(url);
-    setNotice("Progress backup exported.");
+    showNotice("Progress backup exported.");
   }
 
   function importProgress(event: ChangeEvent<HTMLInputElement>) {
@@ -357,21 +450,29 @@ export default function Home() {
         if (parsed.store?.version !== 1 || !parsed.store.progress) {
           throw new Error("Invalid backup");
         }
-        setStore(parsed.store);
+        setStore(normalizeStore(parsed.store));
         if (parsed.settings) {
           setSettings({ ...defaultSettings, ...parsed.settings });
         }
-        setNotice("Progress restored.");
+        showNotice("Progress restored.");
         setPanel(null);
       })
-      .catch(() => setNotice("That file is not a valid Woord Vooruit backup."));
+      .catch(() =>
+        showNotice("That file is not a valid Woord Vooruit backup."),
+      );
     event.target.value = "";
   }
 
   function resetProgress() {
-    if (!window.confirm("Reset every card and erase your study history?")) return;
-    setStore(defaultStore());
-    setNotice("Progress reset.");
+    if (
+      !window.confirm(
+        "Reset every card, restore removed words, and erase your study history?",
+      )
+    ) {
+      return;
+    }
+    setStore(normalizeStore(null));
+    showNotice("Progress reset.");
     setPanel(null);
   }
 
@@ -437,7 +538,7 @@ export default function Home() {
           </div>
           <div>
             <span className="stat-dot new-dot" />
-            <strong>{newBudget}</strong>
+            <strong>{sessionNewRemaining}</strong>
             <small>new left</small>
           </div>
           <div>
@@ -465,7 +566,16 @@ export default function Home() {
                 <span>
                   WORD {currentCard.rank.toLocaleString()} OF 2,000
                 </span>
-                <span className="pos-pill">{currentCard.pos}</span>
+                <div className="card-meta-actions">
+                  <button
+                    className="remove-card-button"
+                    onClick={() => removeCard(currentCard)}
+                    aria-label={`Remove ${currentCard.dutch} from practice`}
+                  >
+                    Remove
+                  </button>
+                  <span className="pos-pill">{currentCard.pos}</span>
+                </div>
               </div>
 
               <div className="prompt-side">
@@ -540,12 +650,11 @@ export default function Home() {
             <div className="placement-note">
               <span className="mix-icon" aria-hidden="true">↝</span>
               <p>
-                <strong>{settings.smartMix ? "B1 smart mix is on." : "Frequency order is on."}</strong>{" "}
-                {settings.smartMix
-                  ? "New cards are sampled across all 2,000 words. “Know it” sends familiar words 45 days ahead."
-                  : "New words follow their conversational frequency rank."}
+                <strong>New words are shuffled.</strong>{" "}
+                Your random order stays on this device, while due reviews still
+                appear on schedule.
               </p>
-              <button onClick={() => setPanel("settings")}>Adjust</button>
+              <button onClick={reshuffleUnseen}>Shuffle again</button>
             </div>
           </>
         ) : (
@@ -581,7 +690,10 @@ export default function Home() {
 
       {notice && (
         <div className="toast" role="status">
-          {notice}
+          <span>{notice}</span>
+          {undoRemovedId && (
+            <button onClick={() => restoreCard(undoRemovedId)}>Undo</button>
+          )}
         </div>
       )}
 
@@ -615,13 +727,29 @@ export default function Home() {
               <div className="panel-body">
                 <div className="coverage-card">
                   <div>
-                    <strong>{Math.round((learned / deck.length) * 100)}%</strong>
+                    <strong>
+                      {activeDeckLength
+                        ? Math.round((learned / activeDeckLength) * 100)
+                        : 100}
+                      %
+                    </strong>
                     <span>deck seen</span>
                   </div>
                   <div className="coverage-track">
-                    <span style={{ width: `${(learned / deck.length) * 100}%` }} />
+                    <span
+                      style={{
+                        width: `${
+                          activeDeckLength
+                            ? (learned / activeDeckLength) * 100
+                            : 100
+                        }%`,
+                      }}
+                    />
                   </div>
-                  <p>{learned.toLocaleString()} of 2,000 words assessed</p>
+                  <p>
+                    {learned.toLocaleString()} of{" "}
+                    {activeDeckLength.toLocaleString()} active words assessed
+                  </p>
                 </div>
                 <div className="panel-stats">
                   <div><strong>{secured}</strong><span>secured</span></div>
@@ -629,6 +757,31 @@ export default function Home() {
                   <div><strong>{store.totalReviews}</strong><span>reviews</span></div>
                   <div><strong>{store.streak}</strong><span>day streak</span></div>
                 </div>
+
+                <section className="panel-section">
+                  <h3>Removed from practice</h3>
+                  <p>
+                    Remove obvious words directly from a card. Their existing
+                    review history is kept in case you restore them.
+                  </p>
+                  {excludedCards.length ? (
+                    <div className="removed-list">
+                      {excludedCards.map((card) => (
+                        <div key={card.id}>
+                          <span>
+                            <strong lang="nl">{card.dutch}</strong>
+                            <small>{card.english}</small>
+                          </span>
+                          <button onClick={() => restoreCard(card.id)}>
+                            Restore
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="empty-list">No words removed yet.</p>
+                  )}
+                </section>
 
                 <section className="panel-section">
                   <h3>Keep your progress</h3>
@@ -695,27 +848,17 @@ export default function Home() {
                   </select>
                 </section>
 
-                <section className="setting-block toggle-row">
-                  <div>
-                    <label htmlFor="smart-mix">B1 smart mix</label>
-                    <p>
-                      Samples across frequency bands so you can find gaps without
-                      grinding through every easy word first.
-                    </p>
-                  </div>
+                <section className="setting-block shuffle-setting">
+                  <label>Randomized word order</label>
+                  <p>
+                    Your unseen words have a random order saved on this device.
+                    Reshuffling does not change cards you already studied.
+                  </p>
                   <button
-                    id="smart-mix"
-                    role="switch"
-                    aria-checked={settings.smartMix}
-                    className={`switch ${settings.smartMix ? "is-on" : ""}`}
-                    onClick={() =>
-                      setSettings((value) => ({
-                        ...value,
-                        smartMix: !value.smartMix,
-                      }))
-                    }
+                    className="secondary-button"
+                    onClick={reshuffleUnseen}
                   >
-                    <span />
+                    Reshuffle unseen words
                   </button>
                 </section>
 

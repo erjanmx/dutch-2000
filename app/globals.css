@@ -316,6 +316,27 @@ select:focus-visible {
   letter-spacing: 0.15em;
 }
 
+.card-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remove-card-button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 6px 3px;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.remove-card-button:hover {
+  color: var(--red);
+}
+
 .pos-pill {
   border: 1px solid #d7d0c4;
   border-radius: 999px;
@@ -685,6 +706,19 @@ kbd {
   padding: 12px 18px;
   box-shadow: 0 10px 30px rgba(23, 41, 58, 0.25);
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.toast button {
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.24);
+  background: transparent;
+  color: white;
+  padding: 2px 0 2px 14px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .panel-backdrop {
@@ -859,6 +893,67 @@ kbd {
   margin-top: 16px;
 }
 
+.removed-list {
+  max-height: 290px;
+  margin-top: 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.removed-list > div {
+  min-height: 58px;
+  padding: 9px 11px 9px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.removed-list > div:last-child {
+  border-bottom: 0;
+}
+
+.removed-list span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.removed-list strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+}
+
+.removed-list small {
+  overflow: hidden;
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.removed-list button {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.panel-section .empty-list {
+  margin-top: 13px;
+  color: #929792;
+  font-style: italic;
+}
+
 .sources .source-links {
   margin-top: 13px;
   display: flex;
@@ -890,6 +985,10 @@ kbd {
   background: var(--paper);
   color: var(--ink);
   padding: 12px;
+}
+
+.shuffle-setting .secondary-button {
+  margin-top: 14px;
 }
 
 .toggle-row {
