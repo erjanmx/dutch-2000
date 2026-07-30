@@ -581,12 +581,16 @@ export default function Home() {
               <div className="prompt-side">
                 <p className="recall-label">
                   {currentCard.pos === "noun"
-                    ? "Recall the meaning — article included"
+                    ? "Recall the article and English meaning"
                     : currentCard.pos === "verb"
                       ? "Recall the meaning and three forms"
                       : "Recall the English meaning"}
                 </p>
-                <h2 lang="nl">{currentCard.dutch}</h2>
+                <h2 lang="nl">
+                  {currentCard.pos === "noun" && !revealed
+                    ? currentCard.word
+                    : currentCard.dutch}
+                </h2>
                 {!revealed && (
                   <p className="soft-hint">Say it aloud before revealing.</p>
                 )}
