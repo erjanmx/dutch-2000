@@ -617,10 +617,6 @@ export default function Home() {
                         <small>PERFECT</small>
                         <strong lang="nl">{currentCard.verb.perfect}</strong>
                       </div>
-                      <div className="auxiliary-note">
-                        <small>AUXILIARY</small>
-                        <strong lang="nl">{currentCard.verb.auxiliary}</strong>
-                      </div>
                     </div>
                   )}
                 </div>

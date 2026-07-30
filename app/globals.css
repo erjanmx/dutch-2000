@@ -466,23 +466,6 @@ select:focus-visible {
   font-weight: 600;
 }
 
-.verb-grid .auxiliary-note {
-  min-height: auto;
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-top: 1px solid var(--line);
-  padding: 9px 14px;
-}
-
-.auxiliary-note strong {
-  color: var(--orange);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-}
-
 .reveal-button {
   width: 100%;
   margin-top: 16px;
@@ -1140,11 +1123,6 @@ kbd {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     align-items: center;
-  }
-
-  .verb-grid .auxiliary-note {
-    border-top: 0;
-    border-bottom: 0;
   }
 
   .rating-grid {
