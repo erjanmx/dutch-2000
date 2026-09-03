@@ -237,13 +237,46 @@ export default function Home() {
   const noticeTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setStore(safeLoadStore());
-      setSettings(safeLoadSettings());
-    });
+    let active = true;
+    async function loadData() {
+      let loadedStore = null;
+      let loadedSettings = null;
+      
+      const params = new URLSearchParams(window.location.search);
+      const syncUrl = params.get("syncUrl");
+      const syncToken = params.get("syncToken");
+      
+      if (syncUrl) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000);
+          const res = await fetch(syncUrl, {
+            headers: syncToken ? { "Authorization": `Bearer ${syncToken}` } : {},
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          
+          if (res.ok) {
+            const parsed = await res.json();
+            if (parsed.store?.version === 1) loadedStore = normalizeStore(parsed.store);
+            if (parsed.settings) loadedSettings = { ...defaultSettings, ...parsed.settings };
+          }
+        } catch (e) {
+          console.error("Failed to load from syncUrl", e);
+        }
+      }
+      
+      if (active) {
+        setStore(loadedStore || safeLoadStore());
+        setSettings(loadedSettings || safeLoadSettings());
+      }
+    }
+    
+    loadData();
+
     const timer = window.setInterval(() => setClock(Date.now()), MINUTE);
     return () => {
-      window.cancelAnimationFrame(frame);
+      active = false;
       window.clearInterval(timer);
       if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
     };
@@ -257,6 +290,27 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   }, [settings]);
+
+  useEffect(() => {
+    if (!store) return;
+    const params = new URLSearchParams(window.location.search);
+    const syncUrl = params.get("syncUrl");
+    if (!syncUrl) return;
+
+    const syncToken = params.get("syncToken");
+    const timeout = setTimeout(() => {
+      fetch(syncUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...(syncToken ? { "Authorization": `Bearer ${syncToken}` } : {})
+        },
+        body: JSON.stringify({ store, settings })
+      }).catch(e => console.error("Failed to sync", e));
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [store, settings]);
 
   const daily = store ? freshDaily(store.daily) : defaultStore().daily;
   const progress = store?.progress ?? EMPTY_PROGRESS;
