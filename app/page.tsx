@@ -243,26 +243,31 @@ export default function Home() {
       let loadedSettings = null;
       
       const params = new URLSearchParams(window.location.search);
-      const syncUrl = params.get("syncUrl");
-      const syncToken = params.get("syncToken");
+      const gistId = params.get("gistId");
+      const gistToken = params.get("gistToken");
       
-      if (syncUrl) {
+      if (gistId) {
         try {
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 5000);
-          const res = await fetch(syncUrl, {
-            headers: syncToken ? { "Authorization": `Bearer ${syncToken}` } : {},
-            signal: controller.signal
-          });
+          const headers: Record<string, string> = {
+            "Accept": "application/vnd.github.v3+json"
+          };
+          if (gistToken) headers["Authorization"] = `Bearer ${gistToken}`;
+          
+          const res = await fetch(`https://api.github.com/gists/${gistId}`, { headers, signal: controller.signal });
           clearTimeout(timeoutId);
           
           if (res.ok) {
-            const parsed = await res.json();
-            if (parsed.store?.version === 1) loadedStore = normalizeStore(parsed.store);
-            if (parsed.settings) loadedSettings = { ...defaultSettings, ...parsed.settings };
+            const data = await res.json();
+            if (data.files?.["progress.json"]?.content) {
+              const parsed = JSON.parse(data.files["progress.json"].content);
+              if (parsed.store?.version === 1) loadedStore = normalizeStore(parsed.store);
+              if (parsed.settings) loadedSettings = { ...defaultSettings, ...parsed.settings };
+            }
           }
         } catch (e) {
-          console.error("Failed to load from syncUrl", e);
+          console.error("Failed to load from gist", e);
         }
       }
       
@@ -294,19 +299,25 @@ export default function Home() {
   useEffect(() => {
     if (!store) return;
     const params = new URLSearchParams(window.location.search);
-    const syncUrl = params.get("syncUrl");
-    if (!syncUrl) return;
+    const gistId = params.get("gistId");
+    if (!gistId) return;
 
-    const syncToken = params.get("syncToken");
+    const gistToken = params.get("gistToken");
     const timeout = setTimeout(() => {
-      fetch(syncUrl, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          ...(syncToken ? { "Authorization": `Bearer ${syncToken}` } : {})
-        },
-        body: JSON.stringify({ store, settings })
-      }).catch(e => console.error("Failed to sync", e));
+      const headers: Record<string, string> = { 
+        "Content-Type": "application/json",
+        "Accept": "application/vnd.github.v3+json"
+      };
+      if (gistToken) headers["Authorization"] = `Bearer ${gistToken}`;
+
+      const payload = JSON.stringify({ store, settings });
+      const body = JSON.stringify({ files: { "progress.json": { content: payload } } });
+
+      fetch(`https://api.github.com/gists/${gistId}`, {
+        method: "PATCH",
+        headers,
+        body
+      }).catch(e => console.error("Failed to save to gist", e));
     }, 1500);
 
     return () => clearTimeout(timeout);
