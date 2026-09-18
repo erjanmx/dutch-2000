@@ -149,6 +149,11 @@ select:focus-visible {
   background: var(--green);
 }
 
+.sync-chip.pending > span,
+.sync-chip.syncing > span {
+  background: var(--yellow);
+}
+
 .sync-chip.error {
   border-color: #e3c4bf;
   color: var(--red);

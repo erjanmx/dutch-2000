@@ -1,6 +1,13 @@
 "use client";
 
-import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import rawDeck from "./data/deck.json";
 import {
   mergeStudyStores,
@@ -42,6 +49,8 @@ const SETTINGS_KEY = "dutch2000.settings.v1";
 const DEVICE_KEY = "dutch2000.device.v1";
 const DAY = 86_400_000;
 const MINUTE = 60_000;
+const SYNC_DEBOUNCE_MS = 5_000;
+const SYNC_MAX_WAIT_MS = 30_000;
 const EMPTY_PROGRESS: Record<string, ReviewRecord> = {};
 const EMPTY_EXCLUDED: Record<string, number> = {};
 
@@ -370,7 +379,7 @@ export default function Home() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
   const [syncConfigured, setSyncConfigured] = useState(false);
   const [syncStatus, setSyncStatus] = useState<
-    "local" | "loading" | "syncing" | "synced" | "error"
+    "local" | "loading" | "pending" | "syncing" | "synced" | "error"
   >("local");
   const [syncError, setSyncError] = useState("");
   const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
@@ -383,11 +392,85 @@ export default function Home() {
   const noticeTimer = useRef<number | null>(null);
   const syncReady = useRef(false);
   const syncQueue = useRef<Promise<void>>(Promise.resolve());
+  const latestStore = useRef<StudyStore | null>(null);
+  const latestSettings = useRef<Settings>(defaultSettings);
+  const changeVersion = useRef(0);
+  const syncDebounceTimer = useRef<number | null>(null);
+  const syncMaxWaitTimer = useRef<number | null>(null);
   const gistConfig = useRef<{
     gistId: string;
     token: string | null;
     deviceId: string;
   } | null>(null);
+
+  const clearScheduledSync = useCallback(() => {
+    if (syncDebounceTimer.current !== null) {
+      window.clearTimeout(syncDebounceTimer.current);
+      syncDebounceTimer.current = null;
+    }
+    if (syncMaxWaitTimer.current !== null) {
+      window.clearTimeout(syncMaxWaitTimer.current);
+      syncMaxWaitTimer.current = null;
+    }
+  }, []);
+
+  const enqueueSync = useCallback(() => {
+    clearScheduledSync();
+
+    const syncCurrentSnapshot = async () => {
+      const config = gistConfig.current;
+      const currentStore = latestStore.current;
+      if (!config || !currentStore || !syncReady.current) return;
+
+      const syncingVersion = changeVersion.current;
+      const currentSettings = latestSettings.current;
+      setSyncStatus("syncing");
+      setSyncError("");
+
+      try {
+        const remotePayloads = await loadGistPayloads(
+          config.gistId,
+          config.token,
+        );
+        const mergedStore = mergeStudyStores([
+          currentStore,
+          ...remotePayloads.map((payload) => payload.store),
+        ]);
+        const updatedAt = Date.now();
+
+        await saveGistPayload(
+          config.gistId,
+          config.token,
+          config.deviceId,
+          {
+            deviceId: config.deviceId,
+            updatedAt,
+            store: mergedStore,
+            settings: currentSettings,
+          },
+        );
+
+        setStore((current) => {
+          if (!current) return mergedStore;
+          const reconciled = mergeStudyStores([mergedStore, current]);
+          return sameStudyStore(reconciled, current) ? current : reconciled;
+        });
+        setSyncStatus(
+          changeVersion.current === syncingVersion ? "synced" : "pending",
+        );
+      } catch (error) {
+        setSyncStatus("error");
+        setSyncError(
+          error instanceof Error ? error.message : "GitHub sync failed.",
+        );
+      }
+    };
+
+    syncQueue.current = syncQueue.current.then(
+      syncCurrentSnapshot,
+      syncCurrentSnapshot,
+    );
+  }, [clearScheduledSync]);
 
   useEffect(() => {
     let active = true;
@@ -464,8 +547,9 @@ export default function Home() {
       if (timeoutId) window.clearTimeout(timeoutId);
       window.clearInterval(timer);
       if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
+      clearScheduledSync();
     };
-  }, []);
+  }, [clearScheduledSync]);
 
   useEffect(() => {
     if (!store) return;
@@ -481,56 +565,40 @@ export default function Home() {
     const config = gistConfig.current;
     if (!config || !syncReady.current) return;
 
-    const timeout = window.setTimeout(() => {
-      const syncCurrentSnapshot = async () => {
-        setSyncStatus("syncing");
-        setSyncError("");
+    latestStore.current = store;
+    latestSettings.current = settings;
+    changeVersion.current += 1;
+    setSyncStatus("pending");
 
-        try {
-          const remotePayloads = await loadGistPayloads(
-            config.gistId,
-            config.token,
-          );
-          const mergedStore = mergeStudyStores([
-            store,
-            ...remotePayloads.map((payload) => payload.store),
-          ]);
-          const updatedAt = Date.now();
-
-          await saveGistPayload(
-            config.gistId,
-            config.token,
-            config.deviceId,
-            {
-              deviceId: config.deviceId,
-              updatedAt,
-              store: mergedStore,
-              settings,
-            },
-          );
-
-          setStore((current) => {
-            if (!current) return mergedStore;
-            const reconciled = mergeStudyStores([mergedStore, current]);
-            return sameStudyStore(reconciled, current) ? current : reconciled;
-          });
-          setSyncStatus("synced");
-        } catch (error) {
-          setSyncStatus("error");
-          setSyncError(
-            error instanceof Error ? error.message : "GitHub sync failed.",
-          );
-        }
-      };
-
-      syncQueue.current = syncQueue.current.then(
-        syncCurrentSnapshot,
-        syncCurrentSnapshot,
+    if (syncDebounceTimer.current !== null) {
+      window.clearTimeout(syncDebounceTimer.current);
+    }
+    syncDebounceTimer.current = window.setTimeout(
+      enqueueSync,
+      SYNC_DEBOUNCE_MS,
+    );
+    if (syncMaxWaitTimer.current === null) {
+      syncMaxWaitTimer.current = window.setTimeout(
+        enqueueSync,
+        SYNC_MAX_WAIT_MS,
       );
-    }, 1500);
+    }
+  }, [enqueueSync, settings, store]);
 
-    return () => window.clearTimeout(timeout);
-  }, [store, settings]);
+  useEffect(() => {
+    const syncWhenHidden = () => {
+      const hasPendingSync =
+        syncDebounceTimer.current !== null ||
+        syncMaxWaitTimer.current !== null;
+      if (document.visibilityState === "hidden" && hasPendingSync) {
+        enqueueSync();
+      }
+    };
+
+    document.addEventListener("visibilitychange", syncWhenHidden);
+    return () =>
+      document.removeEventListener("visibilitychange", syncWhenHidden);
+  }, [enqueueSync]);
 
   const daily = store ? freshDaily(store.daily) : defaultStore().daily;
   const progress = store?.progress ?? EMPTY_PROGRESS;
@@ -796,6 +864,7 @@ export default function Home() {
   const syncLabel = {
     local: "Local only",
     loading: "Loading sync",
+    pending: "Pending sync",
     syncing: "Syncing",
     synced: "Synced",
     error: "Sync failed",
