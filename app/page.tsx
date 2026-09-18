@@ -2,9 +2,17 @@
 
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import rawDeck from "./data/deck.json";
-
-type Rating = "again" | "hard" | "good" | "easy";
-type CardState = "learning" | "review";
+import {
+  mergeStudyStores,
+  newestSettings,
+  type DailyStats,
+  type ExclusionChange,
+  type Rating,
+  type ReviewRecord,
+  type Settings,
+  type StudyStore,
+  type SyncPayload,
+} from "./sync";
 
 type VerbDetails = {
   infinitive: string;
@@ -27,43 +35,11 @@ type Card = {
   verb?: VerbDetails;
 };
 
-type ReviewRecord = {
-  state: CardState;
-  due: number;
-  interval: number;
-  ease: number;
-  reviews: number;
-  lapses: number;
-  lastRating: Rating;
-  lastReviewed: number;
-};
-
-type DailyStats = {
-  date: string;
-  reviewed: number;
-  correct: number;
-  newSeen: number;
-};
-
-type StudyStore = {
-  version: 1;
-  progress: Record<string, ReviewRecord>;
-  excluded: Record<string, number>;
-  newOrder: string[];
-  daily: DailyStats;
-  streak: number;
-  lastStudyDate: string;
-  totalReviews: number;
-};
-
-type Settings = {
-  dailyNew: number;
-};
-
 const deck = rawDeck as Card[];
 const cardById = new Map(deck.map((card) => [card.id, card]));
 const PROGRESS_KEY = "dutch2000.progress.v1";
 const SETTINGS_KEY = "dutch2000.settings.v1";
+const DEVICE_KEY = "dutch2000.device.v1";
 const DAY = 86_400_000;
 const MINUTE = 60_000;
 const EMPTY_PROGRESS: Record<string, ReviewRecord> = {};
@@ -73,6 +49,7 @@ const defaultStore = (): StudyStore => ({
   version: 1,
   progress: {},
   excluded: {},
+  exclusionChanges: {},
   newOrder: [],
   daily: {
     date: localDateKey(),
@@ -83,6 +60,8 @@ const defaultStore = (): StudyStore => ({
   streak: 0,
   lastStudyDate: "",
   totalReviews: 0,
+  resetAt: 0,
+  updatedAt: 0,
 });
 
 const defaultSettings: Settings = {
@@ -144,16 +123,74 @@ function normalizeStore(value: Partial<StudyStore> | null): StudyStore {
   ) {
     return { ...fallback, newOrder: shuffledDeckIds() };
   }
+
+  const resetAt =
+    typeof value.resetAt === "number" && Number.isFinite(value.resetAt)
+      ? value.resetAt
+      : 0;
+  const progress = Object.fromEntries(
+    Object.entries(value.progress).filter(
+      ([, record]) =>
+        record &&
+        typeof record.lastReviewed === "number" &&
+        record.lastReviewed > resetAt,
+    ),
+  );
+  const exclusionChanges: Record<string, ExclusionChange> = {};
+
+  if (
+    typeof value.exclusionChanges === "object" &&
+    value.exclusionChanges !== null
+  ) {
+    for (const [cardId, change] of Object.entries(value.exclusionChanges)) {
+      if (
+        change &&
+        typeof change.excluded === "boolean" &&
+        typeof change.updatedAt === "number" &&
+        change.updatedAt > resetAt
+      ) {
+        exclusionChanges[cardId] = change;
+      }
+    }
+  }
+
+  if (typeof value.excluded === "object" && value.excluded !== null) {
+    for (const [cardId, removedAt] of Object.entries(value.excluded)) {
+      if (
+        typeof removedAt === "number" &&
+        removedAt > resetAt &&
+        (!exclusionChanges[cardId] ||
+          removedAt > exclusionChanges[cardId].updatedAt)
+      ) {
+        exclusionChanges[cardId] = { excluded: true, updatedAt: removedAt };
+      }
+    }
+  }
+
+  const excluded = Object.fromEntries(
+    Object.entries(exclusionChanges)
+      .filter(([, change]) => change.excluded)
+      .map(([cardId, change]) => [cardId, change.updatedAt]),
+  );
+  const inferredUpdatedAt = Math.max(
+    resetAt,
+    ...Object.values(progress).map((record) => record.lastReviewed),
+    ...Object.values(exclusionChanges).map((change) => change.updatedAt),
+  );
+
   return {
     ...fallback,
     ...value,
     daily: freshDaily(value.daily ?? fallback.daily),
-    progress: value.progress,
-    excluded:
-      typeof value.excluded === "object" && value.excluded !== null
-        ? value.excluded
-        : {},
+    progress,
+    excluded,
+    exclusionChanges,
     newOrder: normalizeOrder(value.newOrder),
+    resetAt,
+    updatedAt:
+      typeof value.updatedAt === "number"
+        ? Math.max(value.updatedAt, inferredUpdatedAt)
+        : inferredUpdatedAt,
   };
 }
 
@@ -175,6 +212,110 @@ function safeLoadSettings(): Settings {
   } catch {
     return defaultSettings;
   }
+}
+
+function getDeviceId() {
+  const saved = localStorage.getItem(DEVICE_KEY);
+  if (saved) return saved;
+  const id = crypto.randomUUID();
+  localStorage.setItem(DEVICE_KEY, id);
+  return id;
+}
+
+function gistHeaders(token: string | null, includeContentType = false) {
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2026-03-10",
+  };
+  if (includeContentType) headers["Content-Type"] = "application/json";
+  if (token) headers.Authorization = `Bearer ${token}`;
+  return headers;
+}
+
+function gistError(status: number) {
+  if (status === 401) return "GitHub rejected the sync token.";
+  if (status === 403) return "GitHub denied sync or its rate limit was reached.";
+  if (status === 404) return "The configured GitHub Gist was not found.";
+  if (status === 422) return "GitHub rejected the progress update.";
+  return `GitHub sync failed (${status}).`;
+}
+
+async function loadGistPayloads(
+  gistId: string,
+  token: string | null,
+  signal?: AbortSignal,
+) {
+  const response = await fetch(
+    `https://api.github.com/gists/${encodeURIComponent(gistId)}`,
+    { headers: gistHeaders(token), signal },
+  );
+  if (!response.ok) throw new Error(gistError(response.status));
+
+  const data = (await response.json()) as {
+    files?: Record<
+      string,
+      { content?: string; truncated?: boolean } | null
+    >;
+  };
+  const payloads: Array<{
+    settings: Settings;
+    store: StudyStore;
+    updatedAt: number;
+  }> = [];
+
+  for (const [filename, file] of Object.entries(data.files ?? {})) {
+    if (
+      !file ||
+      (filename !== "progress.json" &&
+        !/^progress-[a-f0-9-]+\.json$/i.test(filename))
+    ) {
+      continue;
+    }
+    if (file.truncated || typeof file.content !== "string") {
+      throw new Error(`${filename} is too large or unavailable for syncing.`);
+    }
+
+    const parsed = JSON.parse(file.content) as SyncPayload;
+    if (parsed.store?.version !== 1 || !parsed.store.progress) continue;
+    const normalized = normalizeStore(parsed.store);
+    payloads.push({
+      store: normalized,
+      settings: { ...defaultSettings, ...parsed.settings },
+      updatedAt:
+        typeof parsed.updatedAt === "number"
+          ? Math.max(parsed.updatedAt, normalized.updatedAt)
+          : normalized.updatedAt,
+    });
+  }
+
+  return payloads;
+}
+
+async function saveGistPayload(
+  gistId: string,
+  token: string | null,
+  deviceId: string,
+  payload: SyncPayload,
+) {
+  const response = await fetch(
+    `https://api.github.com/gists/${encodeURIComponent(gistId)}`,
+    {
+      method: "PATCH",
+      headers: gistHeaders(token, true),
+      body: JSON.stringify({
+        files: {
+          [`progress-${deviceId}.json`]: {
+            content: JSON.stringify(payload),
+          },
+        },
+      }),
+    },
+  );
+  if (!response.ok) throw new Error(gistError(response.status));
+}
+
+function sameStudyStore(left: StudyStore, right: StudyStore) {
+  return JSON.stringify(left) === JSON.stringify(right);
 }
 
 function formatInterval(days: number) {
@@ -227,6 +368,11 @@ function schedule(
 export default function Home() {
   const [store, setStore] = useState<StudyStore | null>(null);
   const [settings, setSettings] = useState<Settings>(defaultSettings);
+  const [syncConfigured, setSyncConfigured] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<
+    "local" | "loading" | "syncing" | "synced" | "error"
+  >("local");
+  const [syncError, setSyncError] = useState("");
   const [revealedCardId, setRevealedCardId] = useState<string | null>(null);
   const [panel, setPanel] = useState<"progress" | "settings" | null>(null);
   const [notice, setNotice] = useState("");
@@ -235,53 +381,87 @@ export default function Home() {
   const revealButton = useRef<HTMLButtonElement>(null);
   const importInput = useRef<HTMLInputElement>(null);
   const noticeTimer = useRef<number | null>(null);
+  const syncReady = useRef(false);
+  const syncQueue = useRef<Promise<void>>(Promise.resolve());
+  const gistConfig = useRef<{
+    gistId: string;
+    token: string | null;
+    deviceId: string;
+  } | null>(null);
 
   useEffect(() => {
     let active = true;
+    const controller = new AbortController();
+    let timeoutId: number | undefined;
+
     async function loadData() {
-      let loadedStore = null;
-      let loadedSettings = null;
-      
+      const localStore = safeLoadStore();
+      const localSettings = safeLoadSettings();
       const params = new URLSearchParams(window.location.search);
       const gistId = params.get("gistId");
-      const gistToken = params.get("gistToken");
-      
-      if (gistId) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 5000);
-          const headers: Record<string, string> = {
-            "Accept": "application/vnd.github.v3+json"
-          };
-          if (gistToken) headers["Authorization"] = `Bearer ${gistToken}`;
-          
-          const res = await fetch(`https://api.github.com/gists/${gistId}`, { headers, signal: controller.signal });
-          clearTimeout(timeoutId);
-          
-          if (res.ok) {
-            const data = await res.json();
-            if (data.files?.["progress.json"]?.content) {
-              const parsed = JSON.parse(data.files["progress.json"].content);
-              if (parsed.store?.version === 1) loadedStore = normalizeStore(parsed.store);
-              if (parsed.settings) loadedSettings = { ...defaultSettings, ...parsed.settings };
-            }
-          }
-        } catch (e) {
-          console.error("Failed to load from gist", e);
+      const token = params.get("gistToken");
+
+      if (!gistId) {
+        if (active) {
+          setStore(localStore);
+          setSettings(localSettings);
         }
+        return;
       }
-      
-      if (active) {
-        setStore(loadedStore || safeLoadStore());
-        setSettings(loadedSettings || safeLoadSettings());
+
+      const deviceId = getDeviceId();
+      gistConfig.current = { gistId, token, deviceId };
+      setSyncConfigured(true);
+      setSyncStatus("loading");
+
+      try {
+        timeoutId = window.setTimeout(() => controller.abort(), 5000);
+        const remotePayloads = await loadGistPayloads(
+          gistId,
+          token,
+          controller.signal,
+        );
+        const mergedStore = mergeStudyStores([
+          localStore,
+          ...remotePayloads.map((payload) => payload.store),
+        ]);
+        const mergedSettings = newestSettings([
+          {
+            settings: localSettings,
+            updatedAt: localStore.updatedAt,
+          },
+          ...remotePayloads.map(({ settings: value, updatedAt }) => ({
+            settings: value,
+            updatedAt,
+          })),
+        ]);
+
+        if (active) {
+          syncReady.current = true;
+          setStore(mergedStore);
+          setSettings(mergedSettings);
+          setSyncStatus("synced");
+          setSyncError("");
+        }
+      } catch (error) {
+        if (!active) return;
+        syncReady.current = false;
+        setStore(localStore);
+        setSettings(localSettings);
+        setSyncStatus("error");
+        setSyncError(
+          error instanceof Error ? error.message : "GitHub sync failed.",
+        );
       }
     }
-    
+
     loadData();
 
     const timer = window.setInterval(() => setClock(Date.now()), MINUTE);
     return () => {
       active = false;
+      controller.abort();
+      if (timeoutId) window.clearTimeout(timeoutId);
       window.clearInterval(timer);
       if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
     };
@@ -298,29 +478,58 @@ export default function Home() {
 
   useEffect(() => {
     if (!store) return;
-    const params = new URLSearchParams(window.location.search);
-    const gistId = params.get("gistId");
-    if (!gistId) return;
+    const config = gistConfig.current;
+    if (!config || !syncReady.current) return;
 
-    const gistToken = params.get("gistToken");
-    const timeout = setTimeout(() => {
-      const headers: Record<string, string> = { 
-        "Content-Type": "application/json",
-        "Accept": "application/vnd.github.v3+json"
+    const timeout = window.setTimeout(() => {
+      const syncCurrentSnapshot = async () => {
+        setSyncStatus("syncing");
+        setSyncError("");
+
+        try {
+          const remotePayloads = await loadGistPayloads(
+            config.gistId,
+            config.token,
+          );
+          const mergedStore = mergeStudyStores([
+            store,
+            ...remotePayloads.map((payload) => payload.store),
+          ]);
+          const updatedAt = Date.now();
+
+          await saveGistPayload(
+            config.gistId,
+            config.token,
+            config.deviceId,
+            {
+              deviceId: config.deviceId,
+              updatedAt,
+              store: mergedStore,
+              settings,
+            },
+          );
+
+          setStore((current) => {
+            if (!current) return mergedStore;
+            const reconciled = mergeStudyStores([mergedStore, current]);
+            return sameStudyStore(reconciled, current) ? current : reconciled;
+          });
+          setSyncStatus("synced");
+        } catch (error) {
+          setSyncStatus("error");
+          setSyncError(
+            error instanceof Error ? error.message : "GitHub sync failed.",
+          );
+        }
       };
-      if (gistToken) headers["Authorization"] = `Bearer ${gistToken}`;
 
-      const payload = JSON.stringify({ store, settings });
-      const body = JSON.stringify({ files: { "progress.json": { content: payload } } });
-
-      fetch(`https://api.github.com/gists/${gistId}`, {
-        method: "PATCH",
-        headers,
-        body
-      }).catch(e => console.error("Failed to save to gist", e));
+      syncQueue.current = syncQueue.current.then(
+        syncCurrentSnapshot,
+        syncCurrentSnapshot,
+      );
     }, 1500);
 
-    return () => clearTimeout(timeout);
+    return () => window.clearTimeout(timeout);
   }, [store, settings]);
 
   const daily = store ? freshDaily(store.daily) : defaultStore().daily;
@@ -440,6 +649,7 @@ export default function Home() {
       streak: nextStreak,
       lastStudyDate: today.date,
       totalReviews: store.totalReviews + 1,
+      updatedAt: now,
     });
     setRevealedCardId(null);
     showNotice(
@@ -451,12 +661,18 @@ export default function Home() {
 
   function removeCard(card: Card) {
     if (!store) return;
+    const now = Date.now();
     setStore({
       ...store,
       excluded: {
         ...store.excluded,
-        [card.id]: Date.now(),
+        [card.id]: now,
       },
+      exclusionChanges: {
+        ...store.exclusionChanges,
+        [card.id]: { excluded: true, updatedAt: now },
+      },
+      updatedAt: now,
     });
     setRevealedCardId(null);
     showNotice(`${card.dutch} removed from practice.`, {
@@ -467,10 +683,19 @@ export default function Home() {
 
   function restoreCard(cardId: string) {
     if (!store) return;
+    const now = Date.now();
     const restoredCard = cardById.get(cardId);
     const nextExcluded = { ...store.excluded };
     delete nextExcluded[cardId];
-    setStore({ ...store, excluded: nextExcluded });
+    setStore({
+      ...store,
+      excluded: nextExcluded,
+      exclusionChanges: {
+        ...store.exclusionChanges,
+        [cardId]: { excluded: false, updatedAt: now },
+      },
+      updatedAt: now,
+    });
     showNotice(
       restoredCard
         ? `${restoredCard.dutch} restored to practice.`
@@ -480,7 +705,11 @@ export default function Home() {
 
   function reshuffleUnseen() {
     if (!store) return;
-    setStore({ ...store, newOrder: shuffledDeckIds() });
+    setStore({
+      ...store,
+      newOrder: shuffledDeckIds(),
+      updatedAt: Date.now(),
+    });
     showNotice("Unseen words reshuffled.");
   }
 
@@ -515,7 +744,10 @@ export default function Home() {
         if (parsed.store?.version !== 1 || !parsed.store.progress) {
           throw new Error("Invalid backup");
         }
-        setStore(normalizeStore(parsed.store));
+        setStore({
+          ...normalizeStore(parsed.store),
+          updatedAt: Date.now(),
+        });
         if (parsed.settings) {
           setSettings({ ...defaultSettings, ...parsed.settings });
         }
@@ -536,7 +768,12 @@ export default function Home() {
     ) {
       return;
     }
-    setStore(normalizeStore(null));
+    const now = Date.now();
+    setStore({
+      ...normalizeStore(null),
+      resetAt: now,
+      updatedAt: now,
+    });
     showNotice("Progress reset.");
     setPanel(null);
   }
@@ -556,6 +793,13 @@ export default function Home() {
     { rating: "good", label: "Good", key: 3 },
     { rating: "easy", label: isNew ? "Know it" : "Easy", key: 4 },
   ];
+  const syncLabel = {
+    local: "Local only",
+    loading: "Loading sync",
+    syncing: "Syncing",
+    synced: "Synced",
+    error: "Sync failed",
+  }[syncStatus];
 
   return (
     <main className="app-shell">
@@ -570,6 +814,16 @@ export default function Home() {
           </span>
         </a>
         <nav className="top-actions" aria-label="Deck controls">
+          {syncConfigured && (
+            <span
+              className={`sync-chip ${syncStatus}`}
+              role="status"
+              title={syncError || "GitHub Gist progress sync"}
+            >
+              <span aria-hidden="true" />
+              {syncLabel}
+            </span>
+          )}
           <button className="text-button" onClick={() => setPanel("progress")}>
             My progress
           </button>
@@ -582,6 +836,16 @@ export default function Home() {
           </button>
         </nav>
       </header>
+
+      {syncConfigured && syncStatus === "error" && (
+        <div className="sync-alert" role="alert">
+          <p>
+            <strong>Cloud sync is paused.</strong> {syncError} Your progress is
+            still saved on this device.
+          </p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      )}
 
       <section className="study-wrap">
         <div className="study-heading">
@@ -748,7 +1012,8 @@ export default function Home() {
 
       <footer className="footer">
         <p>
-          2,000 conversational Dutch lemmas · progress stays on this device
+          2,000 conversational Dutch lemmas ·{" "}
+          {syncConfigured ? `${syncLabel.toLowerCase()} with GitHub Gist` : "progress stays on this device"}
         </p>
         <button onClick={() => setPanel("progress")}>Deck & sources</button>
       </footer>
@@ -851,8 +1116,9 @@ export default function Home() {
                 <section className="panel-section">
                   <h3>Keep your progress</h3>
                   <p>
-                    Your schedule is stored only in this browser. Export a backup
-                    before clearing browser data or moving devices.
+                    {syncConfigured
+                      ? "Your schedule is saved locally and merged with the newest progress from each connected device. Exporting a backup is still recommended."
+                      : "Your schedule is stored only in this browser. Export a backup before clearing browser data or moving devices."}
                   </p>
                   <div className="button-row">
                     <button className="secondary-button" onClick={exportProgress}>
