@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import rawDeck from "./data/deck.json";
+import rawExamples from "./data/examples.json";
 import {
   mergeStudyStores,
   newestSettings,
@@ -42,7 +43,14 @@ type Card = {
   verb?: VerbDetails;
 };
 
+type Example = {
+  text: string;
+  sourceId: number | null;
+  author: string | null;
+};
+
 const deck = rawDeck as Card[];
+const examples = rawExamples as Record<string, Example>;
 const cardById = new Map(deck.map((card) => [card.id, card]));
 const PROGRESS_KEY = "dutch2000.progress.v1";
 const SETTINGS_KEY = "dutch2000.settings.v1";
@@ -325,6 +333,16 @@ async function saveGistPayload(
 
 function sameStudyStore(left: StudyStore, right: StudyStore) {
   return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function exampleSentence(card: Card, revealed: boolean) {
+  const sentence = examples[card.id]?.text ?? `Vandaag leer ik “${card.word}”.`;
+  if (revealed || card.pos !== "noun") return sentence;
+
+  return sentence.replace(
+    /(^|[^\p{L}\p{M}])(?:de|het)(?![\p{L}\p{M}])/giu,
+    "$1___",
+  );
 }
 
 function formatInterval(days: number) {
@@ -989,6 +1007,10 @@ export default function Home() {
                     ? currentCard.word
                     : currentCard.dutch}
                 </h2>
+                <div className="example-context">
+                  <small>IN A SENTENCE</small>
+                  <p lang="nl">{exampleSentence(currentCard, revealed)}</p>
+                </div>
                 {!revealed && (
                   <p className="soft-hint">Say it aloud before revealing.</p>
                 )}
@@ -1216,11 +1238,15 @@ export default function Home() {
                     wordfreq. Meanings, articles, and morphology are derived from
                     English Wiktionary data (CC BY-SA 4.0) via Kaikki; common-verb
                     auxiliary references are cross-checked against TaalBoost.
+                    Example sentences come from Tatoeba contributors under CC BY
+                    2.0 FR, with neutral generated fallbacks where needed.
                   </p>
                   <div className="source-links">
                     <a href="https://github.com/rspeer/wordfreq" target="_blank" rel="noreferrer">wordfreq</a>
                     <a href="https://kaikki.org/dictionary/Dutch/" target="_blank" rel="noreferrer">Kaikki / Wiktionary</a>
                     <a href="https://www.taalboost.nl/blog/most-frequent-dutch-verbs-a2" target="_blank" rel="noreferrer">TaalBoost verbs</a>
+                    <a href="https://tatoeba.org" target="_blank" rel="noreferrer">Tatoeba sentences</a>
+                    <a href="https://creativecommons.org/licenses/by/2.0/fr/" target="_blank" rel="noreferrer">CC BY 2.0 FR</a>
                   </div>
                 </section>
               </div>

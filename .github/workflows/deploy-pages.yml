@@ -31,8 +31,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test progress merging
-        run: node --experimental-strip-types --test tests/sync-merge.test.ts
+      - name: Test deck data and progress merging
+        run: |
+          node --test tests/examples.test.mjs
+          node --experimental-strip-types --test tests/sync-merge.test.ts
 
       - name: Build static site
         run: npm run build:pages
