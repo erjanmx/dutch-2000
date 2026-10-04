@@ -896,7 +896,6 @@ export default function Home() {
             W
           </span>
           <span>
-            <strong>Woord Vooruit</strong>
             <small>Dutch, one card at a time</small>
           </span>
         </a>
@@ -938,7 +937,7 @@ export default function Home() {
         <div className="study-heading">
           <div>
             <p className="eyebrow">TODAY&apos;S SESSION</p>
-            <h1>{currentCard ? "Ready when you are." : "You’re done for now."}</h1>
+            {!currentCard && <h1>You’re done for now.</h1>}
           </div>
           <div className="streak-chip" title="Current study streak">
             <span aria-hidden="true">◇</span>
@@ -1008,12 +1007,8 @@ export default function Home() {
                     : currentCard.dutch}
                 </h2>
                 <div className="example-context">
-                  <small>IN A SENTENCE</small>
                   <p lang="nl">{exampleSentence(currentCard, revealed)}</p>
                 </div>
-                {!revealed && (
-                  <p className="soft-hint">Say it aloud before revealing.</p>
-                )}
               </div>
 
               {revealed && (

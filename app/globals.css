@@ -431,8 +431,7 @@ select:focus-visible {
   padding-bottom: 18px;
 }
 
-.recall-label,
-.soft-hint {
+.recall-label {
   color: var(--muted);
   margin: 0;
   font-size: 12px;
@@ -458,15 +457,6 @@ select:focus-visible {
   margin: 0 0 18px;
 }
 
-.example-context small {
-  display: block;
-  margin-bottom: 7px;
-  color: var(--orange);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
 .example-context p {
   margin: 0;
   color: var(--ink);
@@ -477,10 +467,6 @@ select:focus-visible {
 
 .is-revealed .example-context {
   margin-bottom: 0;
-}
-
-.soft-hint {
-  color: #969995;
 }
 
 .answer-side {
