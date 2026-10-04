@@ -934,43 +934,6 @@ export default function Home() {
       )}
 
       <section className="study-wrap">
-        <div className="study-heading">
-          <div>
-            <p className="eyebrow">TODAY&apos;S SESSION</p>
-            {!currentCard && <h1>You’re done for now.</h1>}
-          </div>
-          <div className="streak-chip" title="Current study streak">
-            <span aria-hidden="true">◇</span>
-            <strong>{store.streak}</strong> day streak
-          </div>
-        </div>
-
-        <div className="stat-strip" aria-label="Study overview">
-          <div>
-            <span className="stat-dot due-dot" />
-            <strong>{dueCards.length}</strong>
-            <small>due now</small>
-          </div>
-          <div>
-            <span className="stat-dot new-dot" />
-            <strong>{sessionNewRemaining}</strong>
-            <small>new left</small>
-          </div>
-          <div>
-            <span className="stat-dot known-dot" />
-            <strong>{secured}</strong>
-            <small>secured</small>
-          </div>
-          <div className="accuracy-stat">
-            <strong>{accuracy || "—"}{accuracy ? "%" : ""}</strong>
-            <small>today&apos;s recall</small>
-          </div>
-        </div>
-
-        <div className="session-track" aria-label={`${Math.round(sessionProgress)}% of session complete`}>
-          <span style={{ width: `${sessionProgress}%` }} />
-        </div>
-
         {currentCard ? (
           <>
             <article
@@ -1094,6 +1057,43 @@ export default function Home() {
             </button>
           </section>
         )}
+
+        <div className="study-heading">
+          <div>
+            <p className="eyebrow">TODAY&apos;S SESSION</p>
+            {!currentCard && <h1>You’re done for now.</h1>}
+          </div>
+          <div className="streak-chip" title="Current study streak">
+            <span aria-hidden="true">◇</span>
+            <strong>{store.streak}</strong> day streak
+          </div>
+        </div>
+
+        <div className="stat-strip" aria-label="Study overview">
+          <div>
+            <span className="stat-dot due-dot" />
+            <strong>{dueCards.length}</strong>
+            <small>due now</small>
+          </div>
+          <div>
+            <span className="stat-dot new-dot" />
+            <strong>{sessionNewRemaining}</strong>
+            <small>new left</small>
+          </div>
+          <div>
+            <span className="stat-dot known-dot" />
+            <strong>{secured}</strong>
+            <small>secured</small>
+          </div>
+          <div className="accuracy-stat">
+            <strong>{accuracy || "—"}{accuracy ? "%" : ""}</strong>
+            <small>today&apos;s recall</small>
+          </div>
+        </div>
+
+        <div className="session-track" aria-label={`${Math.round(sessionProgress)}% of session complete`}>
+          <span style={{ width: `${sessionProgress}%` }} />
+        </div>
       </section>
 
       <footer className="footer">
