@@ -1025,15 +1025,6 @@ export default function Home() {
               </div>
             )}
 
-            <div className="placement-note">
-              <span className="mix-icon" aria-hidden="true">↝</span>
-              <p>
-                <strong>New words are shuffled.</strong>{" "}
-                Your random order stays on this device, while due reviews still
-                appear on schedule.
-              </p>
-              <button onClick={reshuffleUnseen}>Shuffle again</button>
-            </div>
           </>
         ) : (
           <section className="complete-card">
@@ -1094,6 +1085,18 @@ export default function Home() {
         <div className="session-track" aria-label={`${Math.round(sessionProgress)}% of session complete`}>
           <span style={{ width: `${sessionProgress}%` }} />
         </div>
+
+        {currentCard && (
+          <div className="placement-note">
+            <span className="mix-icon" aria-hidden="true">↝</span>
+            <p>
+              <strong>New words are shuffled.</strong>{" "}
+              Your random order stays on this device, while due reviews still
+              appear on schedule.
+            </p>
+            <button onClick={reshuffleUnseen}>Shuffle again</button>
+          </div>
+        )}
       </section>
 
       <footer className="footer">
