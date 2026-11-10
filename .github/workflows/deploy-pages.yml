@@ -33,7 +33,7 @@ jobs:
 
       - name: Test deck data and progress merging
         run: |
-          node --test tests/examples.test.mjs
+          node --test tests/examples.test.mjs tests/deck.test.mjs
           node --experimental-strip-types --test tests/sync-merge.test.ts
 
       - name: Build static site

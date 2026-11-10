@@ -29,7 +29,7 @@ test("server-renders the Woord Vooruit application shell", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>Woord Vooruit — Dutch 2000<\/title>/i);
-  assert.match(html, /Master 2,000 frequent Dutch words/);
+  assert.match(html, /Learn 2,000 curated B1–B2 Dutch words/);
   assert.match(html, /Loading your Dutch deck/);
   assert.match(html, /Preparing your Dutch deck/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);

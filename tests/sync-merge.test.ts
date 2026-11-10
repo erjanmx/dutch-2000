@@ -4,8 +4,26 @@ import test from "node:test";
 import {
   mergeStudyStores,
   newestSettings,
+  summarizeDeckProgress,
   type StudyStore,
 } from "../app/sync.ts";
+
+test("deck changes preserve history without counting retired or excluded cards", () => {
+  const progress = {
+    retained: { ...record(100), interval: 30 },
+    excluded: record(200),
+    retired: record(300, 10),
+  };
+  const excluded = { excluded: 400, retired: 500, anotherRetired: 600 };
+  const stats = summarizeDeckProgress(
+    progress, excluded, new Set(["retained", "excluded", "new"]),
+  );
+  assert.deepEqual(stats, {
+    activeDeckLength: 2, learned: 1, secured: 1, learning: 0,
+  });
+  assert.equal(progress.retired.reviews, 10);
+  assert.equal(excluded.retired, 500);
+});
 
 function store(overrides: Partial<StudyStore> = {}): StudyStore {
   return {

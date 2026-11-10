@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -102,10 +102,13 @@ const examples = Object.fromEntries(
   }),
 );
 
+// Corpus matches are proposals: reviewers must check the target sense and POS.
+// Never overwrite the approved examples or original editorial sentences.
+mkdirSync(resolve(root, "build"), { recursive: true });
 writeFileSync(
-  resolve(root, "app/data/examples.json"),
+  resolve(root, "build/example-candidates.json"),
   `${JSON.stringify(examples)}\n`,
 );
 
 const sourced = Object.values(examples).filter(({ sourceId }) => sourceId !== null).length;
-console.log(`Generated ${deck.length} examples (${sourced} sourced, ${deck.length - sourced} fallbacks).`);
+console.log(`Wrote ${deck.length} proposals to build/example-candidates.json (${sourced} sourced). Review before editing app/data/curated-vocabulary.json.`);

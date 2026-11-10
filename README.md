@@ -1,4 +1,36 @@
-# vinext-starter
+# Woord Vooruit — Dutch 2000
+
+The app uses the approved 2,000-word B1–B2 study list in
+`docs/dutch-2000-book-review.txt`. The 302 textbook-verified entries retain
+page references to *Nederlands op niveau*; other entries are supplementary.
+
+## Vocabulary maintenance
+
+- Edit `app/data/curated-vocabulary.json`, the reviewed source containing meanings,
+  articles, verb forms and attributed examples. Keep card IDs stable.
+- Run `npm run deck:build` to generate `deck.json` and `examples.json` offline.
+  Generation requires exactly the approved words, in the approved order.
+- Run `npm test` and `npm run build:pages` using Node 22.13+ (CI uses Node 24).
+- `scripts/generate-examples.mjs` writes corpus **proposals** to
+  `build/example-candidates.json`; it never overwrites the reviewed examples.
+  Check that a proposal uses the intended meaning and part of speech before
+  copying it into the canonical source.
+
+The approved revision retains 883 original card IDs and adds 1,117 new IDs.
+Retired progress stays available in saved/synchronized history but is excluded
+from active-deck counts. Existing review schedules for retained cards survive.
+New cards are appended to the saved shuffled study order on loading.
+
+Meanings and morphology are adapted from English Wiktionary through
+[Kaikki](https://kaikki.org/dictionary/Dutch/) under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), with editorial
+corrections for everyday senses, articles, auxiliaries and main-clause forms.
+Corpus examples retain Tatoeba sentence IDs and authors (CC BY 2.0 FR); original
+practice examples are explicitly marked editorial and carry no corpus attribution.
+The approved word list includes inflected entries such as *vaste*; these are
+preserved as approved and explained on the card rather than silently substituted.
+
+## Application infrastructure
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and

@@ -49,6 +49,24 @@ export type SyncPayload = {
   settings?: Partial<Settings>;
 };
 
+// Keep retired-card history for sync/backups, but count only the current deck.
+export function summarizeDeckProgress(
+  progress: Record<string, ReviewRecord>,
+  excluded: Record<string, number>,
+  cardIds: ReadonlySet<string>,
+) {
+  const active = [...cardIds].filter((id) => !excluded[id]);
+  const records = active.flatMap((id) => progress[id] ? [progress[id]] : []);
+  const learned = records.length;
+  const secured = records.filter((record) => record.interval >= 21).length;
+  return {
+    activeDeckLength: active.length,
+    learned,
+    secured,
+    learning: learned - secured,
+  };
+}
+
 function newerRecord(
   current: ReviewRecord | undefined,
   candidate: ReviewRecord,

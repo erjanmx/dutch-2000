@@ -1,0 +1,2873 @@
+{
+  "entryCount": 2000,
+  "previousReview": "dutch-2000-b1-review.txt",
+  "removed": [
+    "absoluut",
+    "accepteren",
+    "accommodatie",
+    "actie",
+    "actief",
+    "activiteit",
+    "administratie",
+    "advies",
+    "adviseren",
+    "adviseur",
+    "advocaat",
+    "agenda",
+    "akkoord",
+    "allergie",
+    "allergisch",
+    "alternatief",
+    "ambitie",
+    "ambitieus",
+    "ambulance",
+    "analyse",
+    "annuleren",
+    "apart",
+    "apotheek",
+    "apparaat",
+    "appartement",
+    "archief",
+    "argumenteren",
+    "artikel",
+    "aspect",
+    "assistent",
+    "assistentie",
+    "automatisch",
+    "automobilist",
+    "bagage",
+    "bank",
+    "basis",
+    "bibliotheek",
+    "bitter",
+    "blok",
+    "budget",
+    "bureau",
+    "campagne",
+    "capaciteit",
+    "carrière",
+    "centraal",
+    "centrum",
+    "chaotisch",
+    "cliënt",
+    "code",
+    "collectie",
+    "collega",
+    "college",
+    "combinatie",
+    "commentaar",
+    "commercieel",
+    "commissie",
+    "communicatie",
+    "communiceren",
+    "complex",
+    "concentreren",
+    "concert",
+    "concluderen",
+    "conclusie",
+    "concreet",
+    "concurrent",
+    "concurrentie",
+    "conditie",
+    "conflict",
+    "consequent",
+    "consequentie",
+    "constant",
+    "consument",
+    "contact",
+    "contant",
+    "contract",
+    "contractduur",
+    "controle",
+    "controleren",
+    "controleur",
+    "corrigeren",
+    "coördinatie",
+    "creatief",
+    "crisis",
+    "cultureel",
+    "cultuur",
+    "cursus",
+    "datum",
+    "deadline",
+    "debat",
+    "definitie",
+    "definitief",
+    "dementie",
+    "democratie",
+    "democratisch",
+    "diagnose",
+    "dieet",
+    "digitaal",
+    "diploma",
+    "direct",
+    "directeur",
+    "discussie",
+    "discussiëren",
+    "docent",
+    "documentaire",
+    "economie",
+    "economisch",
+    "effect",
+    "elektriciteit",
+    "elektrisch",
+    "emotie",
+    "energie",
+    "enorm",
+    "enthousiast",
+    "essentieel",
+    "evaluatie",
+    "evalueren",
+    "evenement",
+    "examen",
+    "excuus",
+    "fabriek",
+    "fase",
+    "favoriet",
+    "figuur",
+    "financieel",
+    "financieren",
+    "financiering",
+    "flexibel",
+    "flexibiliteit",
+    "formule",
+    "formulier",
+    "fototentoonstelling",
+    "functie",
+    "functioneren",
+    "garanderen",
+    "garantie",
+    "gas",
+    "gemotiveerd",
+    "generatie",
+    "humor",
+    "identiteit",
+    "impact",
+    "inclusief",
+    "individueel",
+    "industrie",
+    "infectie",
+    "informatie",
+    "initiatief",
+    "inloggen",
+    "inplannen",
+    "inspiratie",
+    "instantie",
+    "instructie",
+    "intake",
+    "integratie",
+    "interessant",
+    "interesse",
+    "interesseren",
+    "internationaal",
+    "interview",
+    "investering",
+    "journalist",
+    "juridisch",
+    "justitie",
+    "kandidaat",
+    "kanker",
+    "karakter",
+    "klasse",
+    "klimaat",
+    "kritiek",
+    "kritisch",
+    "kwaliteit",
+    "literatuur",
+    "locatie",
+    "logisch",
+    "loyaal",
+    "machine",
+    "manager",
+    "markt",
+    "materiaal",
+    "maximaal",
+    "medicijn",
+    "medium",
+    "methode",
+    "minimaal",
+    "minister",
+    "moment",
+    "momenteel",
+    "motivatie",
+    "motiveren",
+    "muzikaal",
+    "nationaal",
+    "natuur",
+    "negatief",
+    "negen",
+    "negeren",
+    "normaal",
+    "notitie",
+    "officieel",
+    "operatie",
+    "optie",
+    "orde",
+    "organisatie",
+    "origineel",
+    "pagina",
+    "paniek",
+    "partner",
+    "paspoort",
+    "passie",
+    "patiënt",
+    "pauze",
+    "pauzeren",
+    "pensioen",
+    "periode",
+    "persoon",
+    "persoonlijk",
+    "pincode",
+    "plan",
+    "plannen",
+    "polikliniek",
+    "polis",
+    "politie",
+    "politiek",
+    "populair",
+    "portemonnee",
+    "positie",
+    "positief",
+    "post",
+    "postcode",
+    "praktijk",
+    "praktijkervaring",
+    "precies",
+    "premie",
+    "presentatie",
+    "presenteren",
+    "prestatie",
+    "presteren",
+    "principe",
+    "privacy",
+    "privé",
+    "probleem",
+    "procedure",
+    "procent",
+    "proces",
+    "productie",
+    "proefperiode",
+    "professioneel",
+    "profiteren",
+    "programma",
+    "project",
+    "promotie",
+    "provincie",
+    "publicatie",
+    "publiceren",
+    "publiek",
+    "puur",
+    "rapport",
+    "reactie",
+    "reageren",
+    "realiseren",
+    "realiteit",
+    "recept",
+    "reclame",
+    "referentie",
+    "regionaal",
+    "registreren",
+    "relatie",
+    "relatief",
+    "renovatie",
+    "reparatie",
+    "repareren",
+    "reserveren",
+    "reservering",
+    "respecteren",
+    "rest",
+    "resultaat",
+    "retourbewijs",
+    "risico",
+    "rol",
+    "route",
+    "salaris",
+    "seksueel",
+    "selectie",
+    "serieus",
+    "situatie",
+    "sociaal",
+    "software",
+    "sollicitatie",
+    "sollicitatiegesprek",
+    "speciaal",
+    "specifiek",
+    "stage",
+    "stagiair",
+    "standaard",
+    "stijl",
+    "structuur",
+    "studeren",
+    "studie",
+    "studiefinanciering",
+    "studiekeuze",
+    "studielast",
+    "studietempo",
+    "studievertraging",
+    "subsidie",
+    "succes",
+    "succesvol",
+    "suggereren",
+    "symbool",
+    "systeem",
+    "talent",
+    "techniek",
+    "technisch",
+    "technologie",
+    "tekst",
+    "temperatuur",
+    "test",
+    "theater",
+    "thema",
+    "theorie",
+    "titel",
+    "totaal",
+    "traditie",
+    "traditioneel",
+    "trainer",
+    "training",
+    "type",
+    "typisch",
+    "universiteit",
+    "variant",
+    "versie",
+    "virus",
+    "visie",
+    "wifi"
+  ],
+  "added": [
+    "aandachtspunt",
+    "aandeel",
+    "aangezien",
+    "aanmaken",
+    "aanmerkelijk",
+    "aanpakken",
+    "aanraken",
+    "aanraking",
+    "aanschaf",
+    "aanstellen",
+    "aanstelling",
+    "aarzeling",
+    "achterblijven",
+    "achterdochtig",
+    "achtereenvolgens",
+    "achterhaald",
+    "achterwege",
+    "adem",
+    "afdwingen",
+    "afknappen",
+    "afremmen",
+    "afschuw",
+    "afwezigheid",
+    "afwijking",
+    "afzien",
+    "allereerst",
+    "andersom",
+    "anderzijds",
+    "bazig",
+    "bedreigend",
+    "bedrog",
+    "begaafd",
+    "begaan",
+    "beheersen",
+    "beheersing",
+    "beklemtonen",
+    "beledigend",
+    "belediging",
+    "belofte",
+    "benadelen",
+    "benadering",
+    "benodigd",
+    "benodigdheden",
+    "benul",
+    "beoogd",
+    "beslaan",
+    "beslist",
+    "beweegreden",
+    "bewering",
+    "blootstellen",
+    "boeien",
+    "boeiend",
+    "braaf",
+    "daadwerkelijk",
+    "daardoor",
+    "daarentegen",
+    "daarna",
+    "daartoe",
+    "daaruit",
+    "dapper",
+    "desnoods",
+    "desondanks",
+    "dief",
+    "diepte",
+    "dierbaar",
+    "doelpunt",
+    "doordringen",
+    "doorgaans",
+    "doorzichtig",
+    "ergernis",
+    "eventueel",
+    "familielid",
+    "fantasierijk",
+    "fel",
+    "fooi",
+    "gaaf",
+    "gaandeweg",
+    "gastvrij",
+    "geboorteland",
+    "gedeeltelijk",
+    "gedreven",
+    "geduldig",
+    "gelijkwaardig",
+    "geoorloofd",
+    "gewetensvol",
+    "gezagsgetrouw",
+    "gids",
+    "gissen",
+    "glad",
+    "goedhartig",
+    "gooien",
+    "grof",
+    "haastig",
+    "halverwege",
+    "hekel",
+    "hetgeen",
+    "hierbij",
+    "hiermee",
+    "hierna",
+    "hiernaast",
+    "hiertegen",
+    "hiërarchie",
+    "hoofdzakelijk",
+    "hoogstens",
+    "hoop",
+    "inademen",
+    "inademing",
+    "inchecken",
+    "inrichten",
+    "inspelen",
+    "integendeel",
+    "invalshoek",
+    "kennelijk",
+    "keurig",
+    "kleuter",
+    "klusje",
+    "klussen",
+    "knikken",
+    "knuffelbaar",
+    "kring",
+    "kriskras",
+    "kruiperig",
+    "leidinggevende",
+    "lenig",
+    "menen",
+    "mits",
+    "moedertaal",
+    "moedig",
+    "moeizaam",
+    "mopperen",
+    "naald",
+    "naarmate",
+    "nadelig",
+    "naderhand",
+    "nagenieten",
+    "nauw",
+    "nauwkeurig",
+    "neigen",
+    "neiging",
+    "niettemin",
+    "nieuwsgierig",
+    "noodzakelijk",
+    "nuchter",
+    "nuttig",
+    "ofschoon",
+    "omspringen",
+    "omstreden",
+    "onbeleefd",
+    "onbetaalbaar",
+    "onbewust",
+    "onbruikbaar",
+    "onderdrukken",
+    "onderdrukking",
+    "ondergeschikt",
+    "onderling",
+    "ondernemend",
+    "onderschatten",
+    "onderschatting",
+    "onderscheid",
+    "ondeugend",
+    "ondiep",
+    "oneerlijk",
+    "ongeduldig",
+    "ongelegen",
+    "ongemakkelijk",
+    "ongeschikt",
+    "ongetwijfeld",
+    "ongezond",
+    "onhandig",
+    "onjuist",
+    "onnauwkeurig",
+    "onnodig",
+    "onredelijk",
+    "onrustig",
+    "onschuldig",
+    "ontevreden",
+    "ontkomen",
+    "ontroerend",
+    "ontroering",
+    "onttrekken",
+    "onvermijdelijk",
+    "onverstandig",
+    "onverwacht",
+    "onvolledig",
+    "onvoorstelbaar",
+    "onwaarschijnlijk",
+    "onzichtbaar",
+    "opdat",
+    "opeisen",
+    "openhartig",
+    "opkijken",
+    "opmaken",
+    "opmerkelijk",
+    "oprecht",
+    "oproepen",
+    "opsluiten",
+    "opvatten",
+    "opvatting",
+    "opzichtig",
+    "overbelast",
+    "overbodig",
+    "overeenstemmen",
+    "overeenstemming",
+    "overgevoelig",
+    "overgewicht",
+    "overkant",
+    "overmatig",
+    "overtuigend",
+    "passend",
+    "peilen",
+    "peiling",
+    "pikken",
+    "pittig",
+    "platteland",
+    "politiebureau",
+    "proppen",
+    "rimpel",
+    "ruimdenkend",
+    "schaars",
+    "schadelijk",
+    "schande",
+    "schandelijk",
+    "schattig",
+    "schets",
+    "schetsen",
+    "schoonheid",
+    "schriftelijk",
+    "schuilen",
+    "slordig",
+    "smaakvol",
+    "soepel",
+    "spoedig",
+    "stapelen",
+    "stapsgewijs",
+    "staren",
+    "stemrecht",
+    "stoer",
+    "streng",
+    "tastbaar",
+    "tegenstrijdig",
+    "tekortkomen",
+    "teleurgesteld",
+    "toegeven",
+    "toereikend",
+    "toeteren",
+    "toevoeging",
+    "troep",
+    "trouw",
+    "twijfelachtig",
+    "uitademen",
+    "uitademing",
+    "uitbundig",
+    "uiterst",
+    "uiting",
+    "uitpuilen",
+    "uitsluitend",
+    "uitstekend",
+    "uitvinding",
+    "uitvlakken",
+    "uitvoerig",
+    "uitzonderlijk",
+    "vaardig",
+    "vanouds",
+    "vanzelf",
+    "vanzelfsprekend",
+    "vastberaden",
+    "veeleisend",
+    "verdeling",
+    "vergevensgezind",
+    "vergissing",
+    "verhouding",
+    "verlegen",
+    "verleidelijk",
+    "vermindering",
+    "vermoeiend",
+    "verontwaardigd",
+    "verouderd",
+    "veroveren",
+    "verovering",
+    "verpesten",
+    "verplicht",
+    "verrichten",
+    "verrichting",
+    "versieren",
+    "versiering",
+    "verslaafd",
+    "verslaving",
+    "verslinden",
+    "verstaanbaar",
+    "verstandig",
+    "vertrouwelijk",
+    "vervelend",
+    "verwarren",
+    "verwarrend",
+    "verwerven",
+    "verwijdering",
+    "verzet",
+    "verzwakken",
+    "vloeibaar",
+    "vloeiend",
+    "vlot",
+    "voedzaam",
+    "volgorde",
+    "volwaardig",
+    "voorbarig",
+    "voorrang",
+    "voortijdig",
+    "voortzetting",
+    "vrijgevig",
+    "vrijwillig",
+    "waardevol",
+    "waarneming",
+    "wantrouwig",
+    "wederzijds",
+    "welgemanierd",
+    "wettelijk",
+    "wijden",
+    "wijs",
+    "willekeurig",
+    "woedend",
+    "woordvolgorde",
+    "zelfbewust",
+    "zelfverzekerd",
+    "zielig",
+    "zodoende",
+    "zonde",
+    "zorg",
+    "zorgeloos",
+    "zorgvuldig",
+    "zorgzaam",
+    "zowat",
+    "zwerven"
+  ],
+  "selection": "Prioritize the full textbook vocabulary index and remove obvious English lookalikes. Retain useful false friends. Supplement to 2,000 distinct entries.",
+  "level": "B1 to B2, matching the course; an editorial study shortlist, not an official CEFR list.",
+  "sourcesReviewed": [
+    "Full book vocabulary index, printed pages 308–312; vocabulary headwords on 309–312. Chapter references cover all six chapters. Idioms and receptive-only section are not included as single-word targets.",
+    "Supplied 29-page PDF, chapter pages 21–32, including the character vocabulary exercise."
+  ],
+  "bookVerifiedCount": 302,
+  "newBookVerifiedCount": 209,
+  "provenance": {
+    "aandachtspunt": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aandeel": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aangezien": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanmaken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanpak": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanpakken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanraken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanraking": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanschaf": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanschaffen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanspreken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanstellen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aanstelling": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aantonen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aarzelen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "aarzeling": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "achterhaald": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "adem": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afdwingen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afkomst": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afkomstig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afleiden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afronden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afwijken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "afwijking": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "amper": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "bazig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "begaan": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "begeleiden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "begeleiding": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "behandelen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "behandeling": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beheersen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "beheersing": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beledigen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beledigend": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "belediging": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "benadrukken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beoogd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beslaan": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beslist": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "bestemd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "bevorderen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "bewaren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beweegreden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "beweren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "bewering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "blootstellen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "boeien": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "boeiend": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "braaf": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "daadwerkelijk": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "daardoor": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 19,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "daarna": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 20,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "daarom": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "daarvoor": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "dankzij": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "dapper": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "destijds": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "dief": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 26,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "diepte": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "dierbaar": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "doelpunt": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 28,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "doordringen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "doorzichtig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "eis": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "eisen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "elders": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "eng": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "ergeren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "ergernis": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 309,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#309"
+      }
+    ],
+    "familielid": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "fantasierijk": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "fatsoenlijk": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "fel": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "fooi": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 26,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gaaf": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gaandeweg": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gastvrij": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gebeurtenis": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "geboorteland": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gedreven": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "geduldig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "geest": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gelijkwaardig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "geloofwaardig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gemengd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "geoorloofd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gespannen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gevaarlijk": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gevoelig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gewetensvol": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gezagsgetrouw": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gids": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gissen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "glad": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 26,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "goedhartig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "gooien": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "grof": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "grondig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "grotendeels": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "gunst": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "haast": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "haasten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "haastig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "hekel": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 21,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "hetgeen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "hiërarchie": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "hoop": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "huidig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inademen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inademing": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inchecken": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 20,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "indien": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inrichten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inrichting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inspelen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "invalshoek": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inzet": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "inzetten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "keurig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "kleuter": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "klusje": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "klussen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "knikken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "knuffelbaar": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "kring": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "kriskras": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "kruiperig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "leiding": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "leidinggevende": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "lenig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "litteken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "mede": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "meerderheid": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "menen": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 28,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "mislukken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "mits": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "moedertaal": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 21,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "moedig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "moeizaam": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "mopperen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "naald": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "naarmate": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "nagenieten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "nauw": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "neigen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "neiging": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "nuchter": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "ofschoon": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "omspringen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "omstreden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "onderdrukken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "onderdrukking": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "ondergeschikt": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "onderhoud": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "onderhouden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "ondernemend": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "onderschatten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "onderschatting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 310,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#310"
+      }
+    ],
+    "onderscheid": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "onderscheiden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ondersteunen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ondertussen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ondeugend": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "ontkomen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ontroerend": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ontroering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "onttrekken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "onverstandig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "onvoorstelbaar": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opdat": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opeisen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "openhartig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "opkijken": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "opmaken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "oproep": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "oproepen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opsluiten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opvang": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opvangen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opvatten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opvatting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "opzichtig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overbelast": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overdrijven": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overeenstemmen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overeenstemming": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overgewicht": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "overigens": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overkant": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overmatig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overnemen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overtuigen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overtuiging": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overwegen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "overweging": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "pand": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "peilen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "peiling": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "pikken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "pittig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "platteland": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "politiebureau": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 26,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "proppen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "redelijk": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "rimpel": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "ruimdenkend": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "schande": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "schandelijk": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "schattig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "schets": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "schetsen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "schoonheid": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "schuilen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "sinds": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "smaakvol": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "stapelen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "staren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "stemrecht": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 25,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "stoer": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "tekortkomen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "telkens": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "tenzij": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "toegang": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "toegeven": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "toeteren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "toevoegen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "toevoeging": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "troep": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "trouw": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "uitademen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitademing": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitbundig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitgaan": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uiting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitpuilen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitsluitend": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 311,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#311"
+      }
+    ],
+    "uitvinden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "uitvinding": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "uitvlakken": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 22,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "vandaar": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vanouds": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vastberaden": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verdelen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verdeling": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vergevensgezind": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "vergissing": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 26,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verhouding": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verleidelijk": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verminderen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vermindering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "veroveren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verovering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verpesten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verrassen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verrassing": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verrichten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verrichting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "versieren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "versiering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verslaafd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verslaving": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verslinden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verstand": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verstandig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      },
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verstoren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vervelend": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 21,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verwarren": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verwarrend": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verwarring": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verwerven": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 21,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "verwijderen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verwijdering": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verzet": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verzetten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "verzwakken": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vloeiend": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "voldoen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "volgorde": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 20,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "voorrang": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "voortijdig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "voortzetten": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "voortzetting": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "vrijgevig": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "waarnemen": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "waarneming": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "welgemanierd": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "werkelijkheid": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "wijden": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "wijs": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "woordvolgorde": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 19,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "zelfbewust": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "zelfverzekerd": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 23,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "zielig": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zogenaamd": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zolang": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zonde": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zorg": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zorgzaam": [
+      {
+        "source": "supplied excerpt chapter text",
+        "pdfPage": 18,
+        "file": "/Users/emx/Downloads/nederlands op niveau.pdf"
+      }
+    ],
+    "zowat": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ],
+    "zwerven": [
+      {
+        "source": "book vocabulary index",
+        "printedPage": 312,
+        "url": "https://www.nt2schoolcollectie.nl/boek/9789046904411#312"
+      }
+    ]
+  },
+  "limitations": "Book-verified denotes index headwords (prepositions/reflexive markers omitted) or individually verified chapter words. Other entries are supplemental, not claimed as book vocabulary. Source categories are not exhaustive text searches.",
+  "application": "Approved review applied to the app: 2,000 cards; 883 existing card IDs retained and 1,117 new words added. Retired-card history remains stored but is excluded from current-deck progress counts."
+}

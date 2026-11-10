@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Woord Vooruit — Dutch 2000",
   description:
-    "Master 2,000 frequent Dutch words with articles, verb forms, smart placement, and spaced repetition.",
+    "Learn 2,000 curated B1–B2 Dutch words with articles, verb forms, contextual examples, and spaced repetition.",
 };
 
 export default function RootLayout({

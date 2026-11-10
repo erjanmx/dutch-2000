@@ -22,6 +22,7 @@ test("every card has a short sentence containing its target word", () => {
     const example = examples[card.id];
     assert.ok(example, `missing example for ${card.id}`);
     assert.ok(example.text.length <= 88, `example is too long for ${card.id}`);
+    assert.doesNotMatch(example.text, /Vandaag leer ik|TODO|TBD/, card.id);
     assert.ok(
       containsWord(example.text, card.word),
       `example for ${card.id} does not contain ${card.word}`,
@@ -29,9 +30,16 @@ test("every card has a short sentence containing its target word", () => {
   }
 });
 
-test("nearly all examples come from the attributed sentence corpus", () => {
-  const sourced = Object.values(examples).filter(
-    ({ sourceId }) => Number.isInteger(sourceId) && sourceId > 0,
-  );
-  assert.ok(sourced.length >= 1_900);
+test("examples distinguish corpus attribution from original editorial sentences", () => {
+  assert.deepEqual(Object.keys(examples).sort(), deck.map((card) => card.id).sort());
+  for (const example of Object.values(examples)) {
+    if (example.source === "tatoeba") {
+      assert.ok(Number.isInteger(example.sourceId) && example.sourceId > 0);
+      assert.equal(typeof example.author, "string");
+    } else {
+      assert.equal(example.source, "editorial");
+      assert.equal(example.sourceId, null);
+      assert.equal(example.author, null);
+    }
+  }
 });

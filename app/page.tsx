@@ -12,6 +12,7 @@ import rawDeck from "./data/deck.json";
 import rawExamples from "./data/examples.json";
 import {
   mergeStudyStores,
+  summarizeDeckProgress,
   newestSettings,
   type DailyStats,
   type ExclusionChange,
@@ -38,7 +39,6 @@ type Card = {
   dutch: string;
   english: string;
   pos: string;
-  frequency: number;
   article?: string;
   verb?: VerbDetails;
 };
@@ -52,6 +52,7 @@ type Example = {
 const deck = rawDeck as Card[];
 const examples = rawExamples as Record<string, Example>;
 const cardById = new Map(deck.map((card) => [card.id, card]));
+const cardIds = new Set(cardById.keys());
 const PROGRESS_KEY = "dutch2000.progress.v1";
 const SETTINGS_KEY = "dutch2000.settings.v1";
 const DEVICE_KEY = "dutch2000.device.v1";
@@ -621,7 +622,9 @@ export default function Home() {
   const daily = store ? freshDaily(store.daily) : defaultStore().daily;
   const progress = store?.progress ?? EMPTY_PROGRESS;
   const excluded = store?.excluded ?? EMPTY_EXCLUDED;
-  const activeDeckLength = deck.length - Object.keys(excluded).length;
+  const { activeDeckLength, learned, secured, learning } = summarizeDeckProgress(
+    progress, excluded, cardIds,
+  );
   const dueCards = useMemo(
     () =>
       deck
@@ -650,13 +653,6 @@ export default function Home() {
   const isNew = Boolean(currentCard && !currentRecord);
   const revealed = Boolean(currentCard && revealedCardId === currentCard.id);
 
-  const activeRecords = Object.entries(progress).filter(
-    ([cardId]) => !excluded[cardId],
-  );
-  const learned = activeRecords.length;
-  const secured = activeRecords.filter(([, record]) => record.interval >= 21)
-    .length;
-  const learning = learned - secured;
   const excludedCards = Object.entries(excluded)
     .sort(([, removedAtA], [, removedAtB]) => removedAtB - removedAtA)
     .map(([cardId]) => cardById.get(cardId))
@@ -1232,17 +1228,19 @@ export default function Home() {
                 <section className="panel-section sources">
                   <h3>Deck sources</h3>
                   <p>
-                    Frequency ranking uses open Dutch frequency data assembled by
-                    wordfreq. Meanings, articles, and morphology are derived from
-                    English Wiktionary data (CC BY-SA 4.0) via Kaikki; common-verb
-                    auxiliary references are cross-checked against TaalBoost.
-                    Example sentences come from Tatoeba contributors under CC BY
-                    2.0 FR, with neutral generated fallbacks where needed.
+                    This approved B1–B2 list contains 2,000 words, with vocabulary
+                    from Nederlands op niveau and supplementary everyday Dutch.
+                    Obvious English lookalikes and beginner filler are omitted.
+                    Meanings, articles, and verb forms are adapted and corrected
+                    from English Wiktionary (CC BY-SA 4.0) via Kaikki.
+                    Examples combine attributed Tatoeba sentences (CC BY 2.0 FR)
+                    with original practice sentences. Word numbers follow the
+                    alphabetical list, not a frequency ranking.
                   </p>
                   <div className="source-links">
-                    <a href="https://github.com/rspeer/wordfreq" target="_blank" rel="noreferrer">wordfreq</a>
+                    <a href="https://www.nt2schoolcollectie.nl/boek/9789046904411#309" target="_blank" rel="noreferrer">Nederlands op niveau</a>
                     <a href="https://kaikki.org/dictionary/Dutch/" target="_blank" rel="noreferrer">Kaikki / Wiktionary</a>
-                    <a href="https://www.taalboost.nl/blog/most-frequent-dutch-verbs-a2" target="_blank" rel="noreferrer">TaalBoost verbs</a>
+                    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>
                     <a href="https://tatoeba.org" target="_blank" rel="noreferrer">Tatoeba sentences</a>
                     <a href="https://creativecommons.org/licenses/by/2.0/fr/" target="_blank" rel="noreferrer">CC BY 2.0 FR</a>
                   </div>
