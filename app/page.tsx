@@ -1050,10 +1050,6 @@ export default function Home() {
             <p className="eyebrow">TODAY&apos;S SESSION</p>
             {!currentCard && <h1>You’re done for now.</h1>}
           </div>
-          <div className="streak-chip" title="Current study streak">
-            <span aria-hidden="true">◇</span>
-            <strong>{store.streak}</strong> day streak
-          </div>
         </div>
 
         <div className="stat-strip" aria-label="Study overview">
