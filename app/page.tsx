@@ -336,14 +336,8 @@ function sameStudyStore(left: StudyStore, right: StudyStore) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
-function exampleSentence(card: Card, revealed: boolean) {
-  const sentence = examples[card.id]?.text ?? `Vandaag leer ik “${card.word}”.`;
-  if (revealed || card.pos !== "noun") return sentence;
-
-  return sentence.replace(
-    /(^|[^\p{L}\p{M}])(?:de|het)(?![\p{L}\p{M}])/giu,
-    "$1___",
-  );
+function exampleSentence(card: Card) {
+  return examples[card.id]?.text ?? `Vandaag leer ik “${card.word}”.`;
 }
 
 function formatInterval(days: number) {
@@ -690,14 +684,18 @@ export default function Home() {
       if (["INPUT", "SELECT", "TEXTAREA", "BUTTON"].includes(target.tagName)) {
         return;
       }
-      if (event.code === "Space" && !revealed) {
-        event.preventDefault();
+      const ratings: Rating[] = ["again", "hard", "good", "easy"];
+      const rating = /^[1-4]$/.test(event.key)
+        ? ratings[Number(event.key) - 1]
+        : undefined;
+      if (!rating && (revealed || event.code !== "Space")) return;
+
+      event.preventDefault();
+      if (event.repeat) return;
+      if (!revealed) {
         setRevealedCardId(currentCard.id);
-      }
-      if (revealed && ["1", "2", "3", "4"].includes(event.key)) {
-        event.preventDefault();
-        const ratings: Rating[] = ["again", "hard", "good", "easy"];
-        rateCard(ratings[Number(event.key) - 1]);
+      } else if (rating) {
+        rateCard(rating);
       }
     }
     window.addEventListener("keydown", handleKey);
@@ -966,7 +964,7 @@ export default function Home() {
                     : currentCard.dutch}
                 </h2>
                 <div className="example-context">
-                  <p lang="nl">{exampleSentence(currentCard, revealed)}</p>
+                  <p lang="nl">{exampleSentence(currentCard)}</p>
                 </div>
               </div>
 
@@ -1003,7 +1001,7 @@ export default function Home() {
                 className="reveal-button"
                 onClick={() => setRevealedCardId(currentCard.id)}
               >
-                Show answer <kbd>Space</kbd>
+                Show answer <kbd>Space</kbd> <kbd>1–4</kbd>
               </button>
             ) : (
               <div className="rating-grid" aria-label="Rate your recall">
@@ -1282,8 +1280,8 @@ export default function Home() {
 
                 <section className="panel-section keyboard-guide">
                   <h3>Keyboard</h3>
-                  <p><kbd>Space</kbd> reveal answer</p>
-                  <p><kbd>1</kbd> again · <kbd>2</kbd> hard · <kbd>3</kbd> good · <kbd>4</kbd> know it/easy</p>
+                  <p><kbd>Space</kbd> or <kbd>1–4</kbd> reveal answer</p>
+                  <p>After revealing: <kbd>1</kbd> again · <kbd>2</kbd> hard · <kbd>3</kbd> good · <kbd>4</kbd> know it/easy</p>
                 </section>
 
                 <section className="danger-zone">
